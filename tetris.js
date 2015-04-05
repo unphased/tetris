@@ -1,25 +1,3 @@
-// ============================================================================
-// Copyright (c) 2013 Steven Lu
-
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the "Software"),
-// to deal in the Software without restriction, including without limitation
-// the rights to use, copy, modify, merge, publish, distribute, sublicense,
-// and/or sell copies of the Software, and to permit persons to whom the
-// Software is furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
-// IN THE SOFTWARE.
-// ============================================================================
-
 var TETRIS = new function () { // namespacing
 	
 function random_det(seed) {
@@ -215,7 +193,7 @@ function toggleMouseControl () {
   isMouseControl = !isMouseControl;
 }
 
-var paused = false;
+var paused = true;
 function isPaused() {
 	return paused;
 }
@@ -248,8 +226,14 @@ var setPause = function(isendgame) {
    
 }
 
+var lastpress;
+function unPause(keyevent) {
+  var now = Date.now();
+  if (!(keyevent && keyevent.keyCode === 80 && (keyevent.shiftKey || ((now - lastpress) < 200)))) {
+	lastpress = now;
+	return;
+  }
 
-function unPause() {
   if (!paused) return;
   if (autoMoveDownInterval == "") {
     autoMoveDownInterval = setInterval(moveDownIntervalFunc,300);
@@ -715,7 +699,7 @@ function keydownfunc(e) {
   //document.title = keynum;
   
   if (keychar == 'P') { 
-    if (paused) unPause();
+    if (paused) unPause(e);
 	else { setPause(false); return; }
   }
   if (paused) return;

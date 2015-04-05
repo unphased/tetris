@@ -79,15 +79,16 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. -->
 
 <div id="instructions" style='position: relative'>
 
+		<p>This website previously hosted a simple and free Tetris game clone. However, due to impending legal action from The Tetris Company and Tetris Holding LLC, the game can no longer be made available for play. Sorry that it has to be this way, but HTMLTetris is dead.</p>
 
 
 	<div id='controls' style='float: left' > 
-		<input type='button' onclick="if (TETRIS.isPaused()) { TETRIS.unPause(); } else { TETRIS.setPause(); }" value='Pause' style='font-size: 150%' /><br/>
 		
 		<p><input type='button' onclick='var i = document.getElementById("instr").style; i.display = (i.display=="none"?"inline":"none"); TETRIS.setPause(); ' value='Toggle Instructions' /></p>
 	</div>
 	<div id='instr' style='display: none;'> 
 
+		<input type='text' style='border:none' />
 		<h1>HTML5 Tetris</h1>
 		<p> Touch events are now supported! Play on iOS and Android: <br/>
 		Swipe anywhere to move, tap to rotate (Can also tap while swiping to rotate). Swipe down to drop.
